@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sudo!404 - 강력한 생산성 도구</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Pretendard:wght@400;600;800&display=swap');
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
+        }
+        
+        .feature-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: #bc8cf2;
+            transform: translateY(-5px);
+        }
+        
+        .accent-text { color: #bc8cf2; }
+        .accent-bg { background-color: #bc8cf2; }
+        
+        .glass-nav {
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #30363d;
+        }
+
+        /* Modal Styles */
+        #status-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Status Modal -->
+    <div id="status-modal" class="p-6">
+        <div class="bg-[#161b22] border border-[#30363d] p-8 rounded-2xl max-w-sm w-full text-center shadow-2xl">
+            <div class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-hourglass-half text-2xl text-yellow-500"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4">현재 검토 중입니다</h3>
+            <p class="text-gray-400 mb-8 leading-relaxed">
+                현재 크롬 웹스토어의 승인을 기다리고 있습니다.<br>
+                조금만 기다려주시면 곧 만나보실 수 있습니다!
+            </p>
+            <button onclick="closeModal()" class="w-full bg-white text-black py-3 rounded-xl font-bold hover:bg-gray-200 transition">
+                확인
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 text-xl font-bold accent-text code-font">
+                <i class="fas fa-terminal"></i> sudo!404
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#features" class="hover:text-white transition">기능소개</a>
+                <a href="#preview" class="hover:text-white transition">미리보기</a>
+            </div>
+            <button onclick="openModal()" class="accent-bg text-black px-5 py-2 rounded-full text-sm font-bold hover:opacity-90 transition">
+                설치하기
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 hero-gradient text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block py-1 px-3 rounded-full bg-purple-900/30 text-purple-400 text-xs font-bold mb-6 border border-purple-500/30">
+                v1.2 Reviewing...
+            </span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
+                웹 경험을 제어하는<br><span class="accent-text">터미널급 권한</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                웹 언락커, 다크 모드, 메모, 타이머까지. <br class="hidden md:block">
+                브라우저에 필요한 모든 도구를 하나의 익스텐션에 담았습니다.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openModal()" class="bg-white text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-200 transition">
+                    Chrome에 추가 (준비중)
+                </button>
+                <a href="#features" class="border border-gray-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition">
+                    자세히 보기
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">강력한 핵심 기능</h2>
+            <div class="w-12 h-1 accent-bg mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Feature 1 -->
+            <div class="feature-card p-8 rounded-2xl">
+                <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-6">
+                    <i class="fas fa-unlock-alt text-2xl accent-text"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Web Unlocker</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    복사 방지, 우클릭 제한이 걸린 웹사이트에서도 자유롭게 콘텐츠를 선택하고 복사할 수 있습니다. <code>stopPropagation</code> 기술로 이벤트 차단을 무력화합니다.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card p-8 rounded-2xl">
+                <div class="w-12 h-12 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-6">
+                    <i class="fas fa-moon text-2xl text-yellow-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Smart Dark Mode</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    모든 웹사이트를 즉시 다크 모드로 전환합니다. CSS 인버트 필터와 색상 보정을 통해 눈의 피로를 최소화하며, 이미지와 영상은 원래 색상을 유지합니다.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card p-8 rounded-2xl">
+                <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-6">
+                    <i class="fas fa-edit text-2xl text-blue-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">sudo_note</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    브라우징 도중 떠오른 아이디어를 즉시 기록하세요. 텍스트 영역에 입력된 내용은 익스텐션을 닫아도 안전하게 저장됩니다.
+                </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card p-8 rounded-2xl">
+                <div class="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center mb-6">
+                    <i class="fas fa-stopwatch text-2xl text-red-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Work Timer</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    작업 시간을 정밀하게 측정하세요. 백그라운드 서비스 워커가 익스텐션 팝업이 닫혀 있는 동안에도 시간을 정확하게 계산합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Preview (Mock UI) -->
+    <section id="preview" class="py-24 px-6 bg-[#090c10]">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1">
+                <h2 class="text-3xl font-bold mb-6">직관적인 인터페이스</h2>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    개발자 지향적인 다크 테마 디자인으로 구성되었습니다. 복잡한 설정 없이 스위치 하나로 기능을 켜고 끌 수 있습니다.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-check text-green-500"></i>
+                        <span>Chrome Manifest V3 표준 준수</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-check text-green-500"></i>
+                        <span>초경량 서비스 워커 아키텍처</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-check text-green-500"></i>
+                        <span>실시간 스토리지 동기화</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Mockup of the popup -->
+            <div class="w-full max-w-[320px] bg-[#0d1117] border-[8px] border-[#30363d] rounded-[32px] overflow-hidden shadow-2xl">
+                <div class="p-4">
+                    <div class="flex justify-between items-center border-b border-[#30363d] pb-3 mb-4">
+                        <h4 class="text-sm font-bold accent-text code-font"><i class="fas fa-terminal"></i> sudo!404</h4>
+                        <div class="flex gap-2">
+                            <div class="w-6 h-6 rounded-full bg-[#161b22] flex items-center justify-center text-[10px]"><i class="fas fa-moon"></i></div>
+                            <div class="w-6 h-6 rounded-full bg-[#161b22] flex items-center justify-center text-[10px]"><i class="fas fa-sun text-yellow-500"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#161b22] border border-[#30363d] rounded-lg p-3 mb-3">
+                        <div class="flex justify-between items-center text-xs font-bold">
+                            <span>Web Unlocker</span>
+                            <div class="w-8 h-4 bg-purple-500 rounded-full relative">
+                                <div class="absolute right-1 top-1 w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#161b22] border border-[#30363d] rounded-lg p-3 mb-3">
+                        <div class="text-[10px] font-bold mb-2">sudo_note</div>
+                        <div class="w-full h-12 bg-[#0d1117] border border-[#30363d] rounded p-2 text-[10px] text-gray-500">기록 중...</div>
+                    </div>
+
+                    <div class="bg-[#161b22] border border-[#30363d] rounded-lg p-3">
+                        <div class="text-center text-xl font-mono text-red-400 mb-3">00:42:15</div>
+                        <div class="flex gap-2">
+                            <div class="flex-1 bg-green-700 text-[10px] py-1 rounded text-center font-bold">START</div>
+                            <div class="flex-1 bg-red-700 text-[10px] py-1 rounded text-center font-bold">STOP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-[#30363d] text-center">
+        <div class="text-sm text-gray-500">
+            <p class="mb-2">© 2024 sudo!404. All rights reserved.</p>
+            <p class="code-font">v1.2 stable build (Reviewing)</p>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('status-modal');
+
+        function openModal() {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
