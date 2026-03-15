@@ -1,11 +1,9 @@
-<!DOCTYPE html>
+!DO<CTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sudo!404 - 강력한 생산성 도구</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Pretendard:wght@400;600;800&display=swap');
         
@@ -51,6 +49,26 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Help Button Style */
+        .help-btn {
+            background-color: transparent;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .help-btn:hover {
+            border-color: #bc8cf2;
+            color: #fff;
+            background: rgba(188, 140, 242, 0.1);
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -78,18 +96,29 @@
             <div class="flex items-center gap-2 text-xl font-bold accent-text code-font">
                 <i class="fas fa-terminal"></i> sudo!404
             </div>
-            <div class="hidden md:flex gap-8 text-sm font-medium">
-                <a href="#features" class="hover:text-white transition">기능소개</a>
-                <a href="#preview" class="hover:text-white transition">미리보기</a>
+            
+            <div class="flex items-center gap-4 md:gap-8">
+                <div class="hidden md:flex gap-8 text-sm font-medium items-center">
+                    <a href="#features" class="hover:text-white transition">기능소개</a>
+                    <a href="#preview" class="hover:text-white transition">미리보기</a>
+                    
+                    <!-- Help Request Button: Fixed CORS error by using direct link approach -->
+                    <a href="https://sudo-494.youtrack.cloud/form/3fe459c6-93eb-4885-8bec-c11870c4da19" 
+                       target="_blank" 
+                       class="help-btn">
+                        <i class="fas fa-question-circle"></i> 도움요청하러가기
+                    </a>
+                </div>
+                
+                <button onclick="openModal()" class="accent-bg text-black px-5 py-2 rounded-full text-sm font-bold hover:opacity-90 transition">
+                    설치하기
+                </button>
             </div>
-            <button onclick="openModal()" class="accent-bg text-black px-5 py-2 rounded-full text-sm font-bold hover:opacity-90 transition">
-                설치하기
-            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="pt-32 pb-20 px-6 hero-gradient text-center">
+    <header class="pt-48 pb-20 px-6 hero-gradient text-center">
         <div class="max-w-4xl mx-auto">
             <span class="inline-block py-1 px-3 rounded-full bg-purple-900/30 text-purple-400 text-xs font-bold mb-6 border border-purple-500/30">
                 v1.2 Reviewing...
@@ -256,10 +285,16 @@
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
             });
         });
     </script>
