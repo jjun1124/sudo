@@ -1,9 +1,11 @@
-!DO<CTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sudo!404 - Web Control Extension</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Pretendard:wght@400;600;800&display=swap');
         
@@ -69,6 +71,20 @@
             color: #fff;
             background: rgba(188, 140, 242, 0.1);
         }
+
+        /* Language Switcher Link */
+        .lang-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #8b949e;
+            font-size: 13px;
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        .lang-link:hover {
+            color: #bc8cf2;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -102,7 +118,6 @@
                     <a href="#features" class="hover:text-white transition">기능소개</a>
                     <a href="#preview" class="hover:text-white transition">미리보기</a>
                     
-                    <!-- Help Request Button: Fixed CORS error by using direct link approach -->
                     <a href="https://sudo-494.youtrack.cloud/form/3fe459c6-93eb-4885-8bec-c11870c4da19" 
                        target="_blank" 
                        class="help-btn">
@@ -195,7 +210,7 @@
         </div>
     </section>
 
-    <!-- Technical Preview (Mock UI) -->
+    <!-- Technical Preview -->
     <section id="preview" class="py-24 px-6 bg-[#090c10]">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="flex-1">
@@ -219,7 +234,7 @@
                 </ul>
             </div>
             
-            <!-- Mockup of the popup -->
+            <!-- Mockup -->
             <div class="w-full max-w-[320px] bg-[#0d1117] border-[8px] border-[#30363d] rounded-[32px] overflow-hidden shadow-2xl">
                 <div class="p-4">
                     <div class="flex justify-between items-center border-b border-[#30363d] pb-3 mb-4">
@@ -258,9 +273,19 @@
 
     <!-- Footer -->
     <footer class="py-12 px-6 border-t border-[#30363d] text-center">
-        <div class="text-sm text-gray-500">
-            <p class="mb-2">© 2024 sudo!404. All rights reserved.</p>
-            <p class="code-font">v1.2 stable build (Reviewing)</p>
+        <div class="max-w-6xl mx-auto">
+            <!-- Language Switcher -->
+            <div class="mb-6">
+                <a href="/en" class="lang-link">
+                    <i class="fas fa-globe"></i>
+                    <span>Go to English Site</span>
+                </a>
+            </div>
+            
+            <div class="text-sm text-gray-500">
+                <p class="mb-2">© 2024 sudo!404. All rights reserved.</p>
+                <p class="code-font">v1.2 stable build (Reviewing)</p>
+            </div>
         </div>
     </footer>
 
@@ -275,14 +300,12 @@
             modal.style.display = 'none';
         }
 
-        // Close modal when clicking outside
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeModal();
             }
         }
 
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
