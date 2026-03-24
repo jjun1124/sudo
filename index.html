@@ -1,354 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JWCR1YCR2B"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-JWCR1YCR2B');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sudo!404 - High-Privilege Web Control</title>
+    <title>EasyLife - The One App for Your Comfort</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
+            scroll-behavior: smooth;
         }
-        
-        .code-font { font-family: 'JetBrains Mono', monospace; }
-        
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
-        }
-        
-        .feature-card {
-            background: #161b22;
-            border: 1px solid #30363d;
+
+        .card-hover:hover {
+            transform: translateY(-10px);
             transition: all 0.3s ease;
         }
-        
-        .feature-card:hover {
-            border-color: #bc8cf2;
-            transform: translateY(-5px);
-        }
-        
-        .accent-text { color: #bc8cf2; }
-        .accent-bg { background-color: #bc8cf2; }
-        
-        .glass-nav {
-            background: rgba(13, 17, 23, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #30363d;
-        }
 
-        #status-modal {
+        .text-blue-custom { color: #4285f4; }
+        .bg-blue-custom { background-color: #4285f4; }
+
+        /* Modal Animation */
+        #statusModal {
             display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .help-btn {
-            background-color: transparent;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-        }
-        .help-btn:hover {
-            border-color: #bc8cf2;
-            color: #fff;
-            background: rgba(188, 140, 242, 0.1);
-        }
-
-        .lang-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            color: #8b949e;
-            font-size: 13px;
-            transition: color 0.2s ease;
-            text-decoration: none;
-        }
-        .lang-link:hover {
-            color: #bc8cf2;
-        }
-        
-        .privacy-section {
-            background: #090c10;
-            border-top: 1px solid #30363d;
-            border-bottom: 1px solid #30363d;
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="bg-gray-50 text-gray-800">
 
-    <div id="status-modal" class="p-6">
-        <div class="bg-[#161b22] border border-[#30363d] p-8 rounded-2xl max-w-sm w-full text-center shadow-2xl">
-            <div class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-hourglass-half text-2xl text-yellow-500"></i>
+    <!-- Status Modal -->
+    <div id="statusModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-blue-50 text-blue-custom rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fas fa-clock"></i>
             </div>
-            <h3 class="text-xl font-bold mb-4">Under Review</h3>
-            <p class="text-gray-400 mb-8 leading-relaxed">
-                Currently awaiting approval from the Chrome Web Store.<br>
-                It will be available shortly. Thank you for your patience!
-            </p>
-            <button onclick="closeModal()" class="w-full bg-white text-black py-3 rounded-xl font-bold hover:bg-gray-200 transition">
-                Confirm
+            <h3 class="text-xl font-bold mb-2">Coming Soon</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">The current app is pending Web Store approval.</p>
+            <button onclick="closeModal()" class="w-full py-3 bg-blue-custom text-white rounded-xl font-bold hover:bg-blue-600 transition">
+                Close
             </button>
         </div>
     </div>
 
-    <nav class="fixed top-0 w-full z-50 glass-nav">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2 text-xl font-bold accent-text code-font">
-                <i class="fas fa-terminal"></i> sudo!404
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-custom">EasyLife</div>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#home" class="hover:text-blue-custom transition">Home</a>
+                <a href="#about" class="hover:text-blue-custom transition">About</a>
+                <a href="#services" class="hover:text-blue-custom transition">Our Apps</a>
+                <a href="#privacy" class="hover:text-blue-custom transition text-gray-500 text-sm mt-1">Privacy</a>
+                <a href="#contact" class="hover:text-blue-custom transition">Contact</a>
             </div>
-            
-            <div class="flex items-center gap-4 md:gap-8">
-                <div class="hidden md:flex gap-8 text-sm font-medium items-center">
-                    <a href="#features" class="hover:text-white transition">Features</a>
-                    <a href="#preview" class="hover:text-white transition">Preview</a>
-                    <a href="#privacy" class="text-[#bc8cf2] font-bold hover:opacity-80 transition">Privacy Policy</a>
-                    
-                    <a href="https://sudo-494.youtrack.cloud/form/3fe459c6-93eb-4885-8bec-c11870c4da19" 
-                       target="_blank" 
-                       class="help-btn">
-                        <i class="fas fa-question-circle"></i> Support
-                    </a>
-                </div>
-                
-                <button onclick="openModal()" class="accent-bg text-black px-5 py-2 rounded-full text-sm font-bold hover:opacity-90 transition">
-                    Install
-                </button>
-            </div>
+            <button class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
-    <header class="pt-48 pb-20 px-6 hero-gradient text-center">
-        <div class="max-w-4xl mx-auto">
-            <span class="inline-block py-1 px-3 rounded-full bg-purple-900/30 text-purple-400 text-xs font-bold mb-6 border border-purple-500/30">
-                v1.2 Reviewing...
-            </span>
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
-                Terminal-Level<br><span class="accent-text">Web Authority</span>
-            </h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-                Unlocker, Dark Mode, Notes, and Timer. <br class="hidden md:block">
-                All essential browser tools in a single extension.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="openModal()" class="bg-white text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-200 transition">
-                    Add to Chrome (Coming Soon)
-                </button>
-                <a href="#features" class="border border-gray-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition">
-                    View Details
-                </a>
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-24 min-h-screen flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="z-10">
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                    The One App to<br>Make Life Easier<br>
+                    <span class="text-blue-custom">EasyLife</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8">Experience technology that makes your daily life simpler and lighter.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#about" class="bg-blue-custom text-white px-8 py-3 rounded-full font-bold hover:bg-blue-600 transition shadow-lg">Learn More</a>
+                    <button onclick="openModal()" class="border-2 border-blue-custom text-blue-custom px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition">
+                        View App Series
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop" 
+                         alt="[이미지: 개발자 워크스테이션]" 
+                         onerror="this.src='https://via.placeholder.com/800x600?text=Developer+Workspace'"
+                         class="w-full h-full object-cover">
+                </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <section id="privacy" class="py-24 px-6 privacy-section">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-[#161b22] border border-[#30363d] rounded-3xl p-10 shadow-2xl">
-                <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                    <i class="fas fa-shield-alt accent-text"></i> Privacy Policy
-                </h2>
-                <div class="space-y-8 text-gray-300">
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-3 underline decoration-[#bc8cf2]">1. No Data Collection</h3>
-                        <p class="leading-relaxed">
-                            <strong>sudo!404</strong> (including 'Our Home Water Fill Game') values your privacy. We do <strong>NOT</strong> collect, store, or transmit any personal information, browsing history, or user data to any external servers.
-                        </p>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 flex space-x-4">
+                    <div class="w-1/2 rounded-3xl overflow-hidden shadow-lg mt-8">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop" alt="[이미지: 노트북 코드]" class="h-full object-cover">
                     </div>
+                    <div class="w-1/2 rounded-3xl overflow-hidden shadow-lg mb-8">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2069&auto=format&fit=crop" alt="[이미지: 개발 화면]" class="h-full object-cover">
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h2 class="text-3xl font-bold text-blue-custom mb-6">Why We Build?</h2>
+                    <p class="text-lg leading-relaxed mb-6">
+                        It all started from simple frustrations.<br>
+                        "Can I have a forced dark mode for my eyes?"<br>
+                        "Copy-paste is blocked... The timer has too many ads..."<br>
+                        <strong>We've put all the solutions into one!</strong>
+                    </p>
+                    <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-custom">
+                        <p class="font-medium italic">"Everyone deserves comfort. Tomorrow's ease, built for today. Technology that connects people and improves lives."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-blue-custom mb-12 uppercase tracking-wide">Our Services</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-blue-custom text-white p-8 rounded-2xl shadow-xl card-hover flex flex-col items-center">
+                    <div class="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center mb-6">
+                        <i class="far fa-smile text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Ease for All</h3>
+                    <p class="opacity-90">Comfort for everyone, health that changes daily life.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-blue-custom text-white p-8 rounded-2xl shadow-xl card-hover flex flex-col items-center">
+                    <div class="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-heart text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Our Philosophy</h3>
+                    <ul class="text-left text-sm space-y-2 opacity-90">
+                        <li>• Right to be comfortable</li>
+                        <li>• Ease for All, Health for Everyone.</li>
+                        <li>Moving towards a better future.</li>
+                    </ul>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-blue-custom text-white p-8 rounded-2xl shadow-xl card-hover flex flex-col items-center">
+                    <div class="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Solo Dev Project</h3>
+                    <p class="opacity-90">Fully independent development.<br>A passion project by a solo developer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Section -->
+    <section id="privacy" class="py-20 bg-gray-100">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-8 border-b pb-4">Privacy Policy</h2>
+                
+                <div class="space-y-6 text-gray-700 leading-relaxed text-sm">
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-3 underline decoration-[#bc8cf2]">2. Permissions & Usage</h3>
-                        <p class="mb-4">We only request permissions essential for core functionality:</p>
-                        <ul class="list-disc pl-6 space-y-2 italic">
-                            <li><strong>Storage:</strong> To save your local game scores and "sudo_note" content on your own computer.</li>
-                            <li><strong>ActiveTab:</strong> Only used when you explicitly trigger tools (like Dark Mode or Unlocker) on a specific tab.</li>
+                        <h3 class="font-bold text-lg mb-2 text-blue-custom">1. No Data Collection Policy</h3>
+                        <p><strong>EasyLife (sudo!404)</strong>, including 'Fill My House with Water', prioritizes user privacy. We <strong>do not collect, store, or transmit</strong> any personal information, browsing history, or user data to external servers.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-blue-custom">2. Permissions & Usage</h3>
+                        <p>We request only the minimum permissions necessary for core features:</p>
+                        <ul class="list-disc ml-6 mt-2 space-y-1">
+                            <li><strong>Storage:</strong> Used only to save game scores and "sudo_note" content locally on your device.</li>
+                            <li><strong>ActiveTab:</strong> Used only when you explicitly run tools like dark mode or unlocking features on a specific tab.</li>
                         </ul>
                     </div>
+
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-3 underline decoration-[#bc8cf2]">3. Third-Party Disclosure</h3>
-                        <p class="leading-relaxed">
-                            Since no data is ever collected or sent to us, we have no data to share with third parties. Your data remains strictly on your local machine.
-                        </p>
-                    </div>
-                    <div class="pt-6 border-t border-[#30363d] text-sm text-gray-500">
-                        <p>Compliance: PIPA (South Korea), COPPA (USA) Standards.</p>
-                        <p>Last Modified: 2024.03.18</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold mb-4">Core Features</h2>
-            <div class="w-12 h-1 accent-bg mx-auto"></div>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="feature-card p-8 rounded-2xl">
-                <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-6">
-                    <i class="fas fa-unlock-alt text-2xl accent-text"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">Web Unlocker</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    Freely select and copy content even on websites with copy protection or right-click restrictions. Neutralizes event blocking with <code>stopPropagation</code>.
-                </p>
-            </div>
-
-            <div class="feature-card p-8 rounded-2xl">
-                <div class="w-12 h-12 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-6">
-                    <i class="fas fa-moon text-2xl text-yellow-400"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">Smart Dark Mode</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    Instantly switch any website to dark mode. Minimizes eye strain with CSS invert filters while maintaining original colors for images and videos.
-                </p>
-            </div>
-
-            <div class="feature-card p-8 rounded-2xl">
-                <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-6">
-                    <i class="fas fa-edit text-2xl text-blue-400"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">sudo_note</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    Instantly capture ideas while browsing. Your notes are securely saved even after closing the extension popup.
-                </p>
-            </div>
-
-            <div class="feature-card p-8 rounded-2xl">
-                <div class="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center mb-6">
-                    <i class="fas fa-stopwatch text-2xl text-red-400"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">Work Timer</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    Precisely track your work hours. The background service worker calculates time accurately even when the popup is closed.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="preview" class="py-24 px-6 bg-[#090c10]">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            <div class="flex-1">
-                <h2 class="text-3xl font-bold mb-6">Intuitive Interface</h2>
-                <p class="text-gray-400 mb-6 leading-relaxed">
-                    Designed with a developer-oriented dark theme. Toggle features with a single switch—no complex configuration required.
-                </p>
-                <ul class="space-y-4">
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500"></i>
-                        <span>Manifest V3 Standards Compliant</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500"></i>
-                        <span>Ultra-lightweight Service Worker</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-check text-green-500"></i>
-                        <span>Real-time Storage Syncing</span>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="w-full max-w-[320px] bg-[#0d1117] border-[8px] border-[#30363d] rounded-[32px] overflow-hidden shadow-2xl">
-                <div class="p-4">
-                    <div class="flex justify-between items-center border-b border-[#30363d] pb-3 mb-4">
-                        <h4 class="text-sm font-bold accent-text code-font"><i class="fas fa-terminal"></i> sudo!404</h4>
-                        <div class="flex gap-2">
-                            <div class="w-6 h-6 rounded-full bg-[#161b22] flex items-center justify-center text-[10px]"><i class="fas fa-moon"></i></div>
-                            <div class="w-6 h-6 rounded-full bg-[#161b22] flex items-center justify-center text-[10px]"><i class="fas fa-sun text-yellow-500"></i></div>
-                        </div>
+                        <h3 class="font-bold text-lg mb-2 text-blue-custom">3. Third-Party Disclosure</h3>
+                        <p>Since no data is collected or transmitted, we have no data to share with third parties. Your data remains strictly on your <strong>local device</strong>.</p>
                     </div>
 
-                    <div class="bg-[#161b22] border border-[#30363d] rounded-lg p-3 mb-3">
-                        <div class="flex justify-between items-center text-xs font-bold">
-                            <span>Web Unlocker</span>
-                            <div class="w-8 h-4 bg-purple-500 rounded-full relative">
-                                <div class="absolute right-1 top-1 w-2 h-2 bg-white rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#161b22] border border-[#30363d] rounded-lg p-3 mb-3">
-                        <div class="text-[10px] font-bold mb-2">sudo_note</div>
-                        <div class="w-full h-12 bg-[#0d1117] border border-[#30363d] rounded p-2 text-[10px] text-gray-500">Logging...</div>
-                    </div>
-
-                    <div class="bg-[#161b22] border border-[#30363d] rounded-lg p-3">
-                        <div class="text-center text-xl font-mono text-red-400 mb-3">00:42:15</div>
-                        <div class="flex gap-2">
-                            <div class="flex-1 bg-green-700 text-[10px] py-1 rounded text-center font-bold">START</div>
-                            <div class="flex-1 bg-red-700 text-[10px] py-1 rounded text-center font-bold">STOP</div>
-                        </div>
+                    <div class="pt-4 border-t text-xs text-gray-500">
+                        <p>Compliance: Personal Information Protection Act (PIPA, Korea), Children's Online Privacy Protection Act (COPPA, USA).</p>
+                        <p class="mt-2 font-medium italic">Last Modified: March 24, 2026</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 px-6 border-t border-[#30363d] text-center">
-        <div class="max-w-6xl mx-auto">
-            <div class="mb-6">
-                <a href="/" class="lang-link">
-                    <i class="fas fa-globe"></i>
-                    <span>한국어 사이트로 가기</span>
-                </a>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-blue-custom mb-12">Get in Touch</h2>
+            <div class="bg-gray-50 p-10 rounded-3xl shadow-sm border border-gray-100">
+                <div class="mb-8">
+                    <h3 class="text-blue-custom font-bold text-lg mb-2">Email</h3>
+                    <a href="mailto:sudo404404@outlook.com" class="text-xl font-medium hover:text-blue-600 underline">sudo404404@outlook.com</a>
+                </div>
+                <div>
+                    <h3 class="text-gray-700 font-bold text-lg mb-4">Instagram</h3>
+                    <a href="https://www.instagram.com/easy_kr_/" target="_blank" rel="noopener noreferrer" class="inline-block transform hover:scale-110 transition">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-16 h-16">
+                    </a>
+                </div>
             </div>
-            
-            <div class="text-sm text-gray-500 mb-4">
-                <p class="mb-2">© 2024 sudo!404. All rights reserved.</p>
-                <p class="code-font">v1.2 stable build (Reviewing)</p>
-            </div>
+        </div>
+    </section>
 
-            <div class="max-w-lg mx-auto p-4 border border-[#30363d] rounded-lg bg-[#161b22]/50 text-[11px] text-gray-500 leading-tight">
-                <p><strong>Privacy Notice:</strong> No personal data is collected or shared. See our full <a href="#privacy" class="underline italic">Privacy Policy</a> above. We comply with PIPA (KR) and COPPA (US) standards.</p>
+    <!-- Footer -->
+    <footer class="bg-blue-custom text-white py-12 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-6 flex flex-wrap justify-center gap-6 text-sm opacity-80">
+                <a href="#privacy" class="hover:underline">Open Source License</a>
+                <a href="#privacy" class="hover:underline">Reference License</a>
+                <a href="#privacy" class="hover:underline font-bold">Privacy Policy</a>
             </div>
+            <p class="text-sm mb-4 opacity-70 italic">Images used in this website were generated by Gemini AI.</p>
+            <p class="opacity-90 font-medium">&copy; 2024 EasyLife. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        const modal = document.getElementById('status-modal');
-        function openModal() { modal.style.display = 'flex'; }
-        function closeModal() { modal.style.display = 'none'; }
-        window.onclick = function(event) { if (event.target == modal) closeModal(); }
+        const modal = document.getElementById('statusModal');
         
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+        function openModal() {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close on outside click
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
+
 </body>
 </html>
